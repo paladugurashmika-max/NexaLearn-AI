@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Analytics & Achievements — NexaLearn AI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <div>
+          <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">NexaLearn<span style="color: var(--primary-light);">.AI</span></span>
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Smart Education</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core Platform</div>
+        <a href="../dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="study-studio.html" class="nav-item">
+          <i data-lucide="file-edit"></i>
+          <span>AI Study Studio</span>
+        </a>
+        <a href="assistant.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>Ask StudyAI</span>
+        </a>
+
+        <div class="nav-category">Practice & Intelligence</div>
+        <a href="quiz.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Smart Practice Zone</span>
+        </a>
+        <a href="flashcards.html" class="nav-item">
+          <i data-lucide="layers"></i>
+          <span>AI Flashcards</span>
+        </a>
+        <a href="adaptive-learning.html" class="nav-item">
+          <i data-lucide="cpu"></i>
+          <span>Adaptive Intelligence</span>
+        </a>
+
+        <div class="nav-category">Growth & Planning</div>
+        <a href="planner.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>AI Study Planner</span>
+        </a>
+        <a href="progress.html" class="nav-item active">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Learning Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Student Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-name">NexaLearn Demo Student</div>
+            <div class="user-role" id="sidebar-grade">Undergraduate</div>
+          </div>
+          <button onclick="logoutStudent()" title="Logout" class="close-btn" style="margin-left: auto;">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title">
+          <h2>Visual Learning Analytics</h2>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge badge-primary">Actual Student Data</span>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- 4 Key Analytics Metric Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon purple"><i data-lucide="percent"></i></div>
+            <div>
+              <div class="stat-value" id="analytic-avg-score">0%</div>
+              <div class="stat-label">Average Quiz Score</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon cyan"><i data-lucide="target"></i></div>
+            <div>
+              <div class="stat-value" id="analytic-total-quizzes">0</div>
+              <div class="stat-label">Completed Assessments</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon amber"><i data-lucide="flame"></i></div>
+            <div>
+              <div class="stat-value" id="analytic-streak">1</div>
+              <div class="stat-label">Days Active Streak</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon emerald"><i data-lucide="award"></i></div>
+            <div>
+              <div class="stat-value" id="analytic-mastery">0%</div>
+              <div class="stat-label">Aggregate Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Chart Visualizations (Line Chart: Trajectory, Bar Chart: Mastery by Topic) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+          <!-- Trajectory Line Chart -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Score Trajectory & Growth</h3>
+                <p style="font-size: 0.85rem;">Accuracy trend across successive quiz attempts</p>
+              </div>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="trajectoryChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Mastery Breakdown Bar Chart -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Topic Mastery Distribution</h3>
+                <p style="font-size: 0.85rem;">Calculated mastery across academic topics</p>
+              </div>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="topicMasteryChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievement Badges Showcase -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Gamification & Milestone Badges</h3>
+              <p style="font-size: 0.85rem;">Awarded deterministically based on verified learning activities</p>
+            </div>
+          </div>
+
+          <div id="achievements-showcase-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/progress.js"></script>
+</body>
+</html>
+

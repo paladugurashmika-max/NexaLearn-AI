@@ -1,0 +1,111 @@
+/* ==========================================================================
+   NexaLearn AI - Responsive Layout & Media Queries
+   ========================================================================== */
+
+/* Tablet & Smaller Desktops */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .chat-sidebar {
+    display: none; /* Can be toggled or condensed */
+  }
+
+  .hero-title {
+    font-size: 2.85rem;
+  }
+}
+
+/* Mobile & Small Tablets */
+@media (max-width: 768px) {
+  .mobile-toggle {
+    display: inline-flex;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  }
+
+  .main-wrapper {
+    margin-left: 0;
+  }
+
+  .landing-nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero-section {
+    padding: 7rem 1.25rem 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .btn-lg {
+    width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-body {
+    padding: 1.25rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .topbar {
+    padding: 0 1.25rem;
+  }
+
+  .topbar-actions .streak-pill span,
+  .topbar-actions .points-pill span {
+    display: none;
+  }
+
+  .flashcard-wrapper {
+    height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .question-box {
+    padding: 1.5rem;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+}
+

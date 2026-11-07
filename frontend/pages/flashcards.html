@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Flashcards — NexaLearn AI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <div>
+          <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">NexaLearn<span
+              style="color: var(--primary-light);">.AI</span></span>
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Smart Education</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core Platform</div>
+        <a href="../dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="study-studio.html" class="nav-item">
+          <i data-lucide="file-edit"></i>
+          <span>AI Study Studio</span>
+        </a>
+        <a href="assistant.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>Ask StudyAI</span>
+        </a>
+
+        <div class="nav-category">Practice & Intelligence</div>
+        <a href="quiz.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Smart Practice Zone</span>
+        </a>
+        <a href="flashcards.html" class="nav-item active">
+          <i data-lucide="layers"></i>
+          <span>AI Flashcards</span>
+        </a>
+        <a href="adaptive-learning.html" class="nav-item">
+          <i data-lucide="cpu"></i>
+          <span>Adaptive Intelligence</span>
+        </a>
+
+        <div class="nav-category">Growth & Planning</div>
+        <a href="planner.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>AI Study Planner</span>
+        </a>
+        <a href="progress.html" class="nav-item">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Learning Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Student Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-name">NexaLearn Demo Student</div>
+            <div class="user-role" id="sidebar-grade">Undergraduate</div>
+          </div>
+          <button onclick="logoutStudent()" title="Logout" class="close-btn" style="margin-left: auto;">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title">
+          <h2>AI Flashcards Studio</h2>
+        </div>
+        <div class="topbar-actions">
+          <button onclick="openCreateModal()" class="btn btn-primary btn-sm">
+            <i data-lucide="sparkles"></i>
+            <span>Generate Flashcard Deck</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Interactive 3D Card Deck Viewer -->
+        <div class="card" style="margin-bottom: 2rem; text-align: center; padding: 2rem;">
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto 1rem;">
+            <div>
+              <span class="badge badge-primary" id="card-topic-badge">Topic Deck</span>
+            </div>
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--text-muted);" id="card-counter">
+              Card 1 of 6
+            </div>
+            <div>
+              <span class="badge badge-moderate" id="card-mastery-badge">Learning</span>
+            </div>
+          </div>
+
+          <!-- 3D Flip Flashcard -->
+          <div class="flashcard-wrapper" id="flashcard-element" onclick="flipCard()">
+            <div class="flashcard-inner">
+              <!-- Front -->
+              <div class="flashcard-face flashcard-front">
+                <div class="flashcard-label">Concept Prompt (Click to Flip)</div>
+                <div class="flashcard-content" id="card-front-text">
+                  Loading flashcards...
+                </div>
+                <div class="flashcard-hint">
+                  <i data-lucide="rotate-cw" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                  Click anywhere to reveal explanation
+                </div>
+              </div>
+
+              <!-- Back -->
+              <div class="flashcard-face flashcard-back">
+                <div class="flashcard-label" style="color: #34d399;">Explanation & Key Answer</div>
+                <div class="flashcard-content" id="card-back-text" style="font-size: 1.15rem;">
+                  Answer text will appear here.
+                </div>
+                <div class="flashcard-hint">
+                  <i data-lucide="rotate-cw" style="width: 14px; height: 14px; vertical-align: middle;"></i>
+                  Click to flip back
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Controls -->
+          <div
+            style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button onclick="prevCard()" class="btn btn-secondary btn-sm" id="prev-card-btn" disabled>
+              <i data-lucide="arrow-left"></i>
+              <span>Previous</span>
+            </button>
+
+            <!-- Mark Mastery Status -->
+            <button onclick="markCurrentCardMastery('learning')" class="btn btn-secondary btn-sm"
+              title="Still learning">
+              <span>Learning</span>
+            </button>
+            <button onclick="markCurrentCardMastery('mastered')" class="btn btn-outline btn-sm"
+              style="border-color: var(--success); color: #34d399;" title="Mastered!">
+              <i data-lucide="check"></i>
+              <span>Mark Mastered</span>
+            </button>
+
+            <button onclick="nextCard()" class="btn btn-primary btn-sm" id="next-card-btn">
+              <span>Next</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Saved Deck Collection -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>All Flashcard Collections</h3>
+              <p style="font-size: 0.85rem;">Saved cards for spaced retrieval practice</p>
+            </div>
+          </div>
+
+          <div id="flashcards-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Generate Flashcards -->
+  <div class="modal-overlay" id="generate-cards-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Generate AI Flashcard Deck</h3>
+        <button class="close-btn" onclick="closeCreateModal()">&times;</button>
+      </div>
+
+      <form id="generate-cards-form">
+        <div class="form-group">
+          <label class="form-label" for="card-gen-topic">Topic *</label>
+          <input type="text" id="card-gen-topic" class="form-input"
+            placeholder="e.g. Python Recursion, Dynamic Programming" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="card-gen-subject">Subject</label>
+          <input type="text" id="card-gen-subject" class="form-input" placeholder="e.g. Computer Science"
+            value="Computer Science">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="card-gen-count">Deck Size</label>
+          <select id="card-gen-count" class="form-select">
+            <option value="6" selected>6 Flashcards (Quick Spaced Retrieval)</option>
+            <option value="10">10 Flashcards (Standard Revision)</option>
+            <option value="15">15 Flashcards (Deep Recall)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="card-gen-content">Source Content (Optional)</label>
+          <textarea id="card-gen-content" class="form-textarea"
+            placeholder="Paste notes or leave blank for Gemini3.5 Flash to synthesize from curriculum..."></textarea>
+        </div>
+
+        <button type="submit" id="card-submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+          <i data-lucide="sparkles"></i>
+          <span>Generate Deck with Gemini3.5 Flash AI</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/flashcards.js"></script>
+</body>
+
+</html>

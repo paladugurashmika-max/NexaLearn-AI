@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask StudyAI Tutor — NexaLearn AI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <div>
+          <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">NexaLearn<span style="color: var(--primary-light);">.AI</span></span>
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Smart Education</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core Platform</div>
+        <a href="../dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="study-studio.html" class="nav-item">
+          <i data-lucide="file-edit"></i>
+          <span>AI Study Studio</span>
+        </a>
+        <a href="assistant.html" class="nav-item active">
+          <i data-lucide="bot"></i>
+          <span>Ask StudyAI</span>
+        </a>
+
+        <div class="nav-category">Practice & Intelligence</div>
+        <a href="quiz.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Smart Practice Zone</span>
+        </a>
+        <a href="flashcards.html" class="nav-item">
+          <i data-lucide="layers"></i>
+          <span>AI Flashcards</span>
+        </a>
+        <a href="adaptive-learning.html" class="nav-item">
+          <i data-lucide="cpu"></i>
+          <span>Adaptive Intelligence</span>
+        </a>
+
+        <div class="nav-category">Growth & Planning</div>
+        <a href="planner.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>AI Study Planner</span>
+        </a>
+        <a href="progress.html" class="nav-item">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Learning Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Student Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-name">NexaLearn Demo Student</div>
+            <div class="user-role" id="sidebar-grade">Undergraduate</div>
+          </div>
+          <button onclick="logoutStudent()" title="Logout" class="close-btn" style="margin-left: auto;">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title">
+          <h2>Ask StudyAI — Learning Assistant</h2>
+        </div>
+        <div class="topbar-actions">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Depth:</span>
+            <select id="chat-difficulty" class="form-select" style="padding: 0.35rem 0.75rem; font-size: 0.85rem; width: auto;">
+              <option value="beginner">Beginner (Intuitive & Analogies)</option>
+              <option value="intermediate" selected>Intermediate (Standard)</option>
+              <option value="advanced">Advanced (Deep Technical)</option>
+            </select>
+          </div>
+          <button onclick="createNewConversation()" class="btn btn-primary btn-sm">
+            <i data-lucide="plus"></i>
+            <span>New Chat</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-body" style="padding: 1.5rem;">
+        <div class="chat-layout">
+          <!-- Conversation History Sidebar -->
+          <div class="chat-sidebar">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h4 style="font-size: 0.95rem;">Conversations</h4>
+              <button onclick="createNewConversation()" class="btn btn-secondary btn-sm" title="Start new conversation">
+                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
+              </button>
+            </div>
+
+            <div id="conversations-list" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem;">
+              <div class="empty-state" style="padding: 1.5rem 0.5rem;">
+                <div class="empty-icon" style="width: 40px; height: 40px;"><i data-lucide="message-square"></i></div>
+                <div class="empty-title" style="font-size: 0.85rem;">No conversations yet</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Messages Area -->
+          <div class="chat-main">
+            <div class="chat-messages" id="messages-container">
+              <div class="message-bubble message-assistant">
+                <div style="font-weight: 700; color: var(--primary-light); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+                  <i data-lucide="bot" style="width: 16px; height: 16px;"></i>
+                  <span>StudyAI Tutor</span>
+                </div>
+                <div>
+                  Hello! I'm your dedicated AI academic tutor. What concept, formula, or coding problem can I help you master today?
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-area">
+              <form id="chat-form" class="chat-input-box">
+                <input type="text" id="chat-input" class="form-input" placeholder="Ask about Python recursion, data structures, or biology..." autocomplete="off" required>
+                <button type="submit" id="send-btn" class="btn btn-primary">
+                  <i data-lucide="send"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/assistant.js"></script>
+</body>
+</html>
+

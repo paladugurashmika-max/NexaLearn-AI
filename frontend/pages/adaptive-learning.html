@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Intelligence Hub — NexaLearn AI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <div>
+          <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">NexaLearn<span style="color: var(--primary-light);">.AI</span></span>
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Smart Education</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core Platform</div>
+        <a href="../dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="study-studio.html" class="nav-item">
+          <i data-lucide="file-edit"></i>
+          <span>AI Study Studio</span>
+        </a>
+        <a href="assistant.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>Ask StudyAI</span>
+        </a>
+
+        <div class="nav-category">Practice & Intelligence</div>
+        <a href="quiz.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Smart Practice Zone</span>
+        </a>
+        <a href="flashcards.html" class="nav-item">
+          <i data-lucide="layers"></i>
+          <span>AI Flashcards</span>
+        </a>
+        <a href="adaptive-learning.html" class="nav-item active">
+          <i data-lucide="cpu"></i>
+          <span>Adaptive Intelligence</span>
+        </a>
+
+        <div class="nav-category">Growth & Planning</div>
+        <a href="planner.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>AI Study Planner</span>
+        </a>
+        <a href="progress.html" class="nav-item">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Learning Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Student Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-name">NexaLearn Demo Student</div>
+            <div class="user-role" id="sidebar-grade">Undergraduate</div>
+          </div>
+          <button onclick="logoutStudent()" title="Logout" class="close-btn" style="margin-left: auto;">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title">
+          <h2>Adaptive Learning Intelligence Hub</h2>
+        </div>
+        <div class="topbar-actions">
+          <span class="badge badge-primary">Deterministic Engine</span>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Banner: Signature Innovation -->
+        <div class="card" style="margin-bottom: 2rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%); border-color: rgba(139, 92, 246, 0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <div class="badge badge-primary" style="margin-bottom: 0.5rem;">Signature Innovation</div>
+              <h2 style="font-size: 1.5rem; margin-bottom: 0.35rem;">Dynamic Knowledge Gap & Mastery Engine</h2>
+              <p style="font-size: 0.95rem; max-width: 800px;">
+                NexaLearn AI does not guess or fabricate scores. We calculate transparent, weighted topic mastery (0-100%) from your actual quiz assessments, detect recurring errors, and engineer personalized next steps.
+              </p>
+            </div>
+            <a href="quiz.html" class="btn btn-primary btn-sm">
+              <i data-lucide="check-square"></i>
+              <span>Test Knowledge Now</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Continuous Learning Cycle Visual Progress Tracker -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3>Continuous Learning Cycle Status</h3>
+              <p style="font-size: 0.85rem;" id="cycle-current-status">Calculating cycle telemetry...</p>
+            </div>
+          </div>
+
+          <div class="cycle-grid" id="cycle-stages-grid">
+            <!-- Stages 1-6 injected with active highlighting -->
+          </div>
+        </div>
+
+        <!-- 3 Knowledge Gap Buckets (Weak, Moderate, Strong) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+          <!-- Weak Topics (< 50%) -->
+          <div class="card" style="border-top: 4px solid var(--danger);">
+            <div class="card-header">
+              <div>
+                <h3 style="color: #f87171; font-size: 1.15rem;">
+                  <i data-lucide="alert-triangle" style="width: 18px; height: 18px; vertical-align: middle;"></i>
+                  Critical Knowledge Gaps
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Mastery &lt; 50% • Urgent Remediation</p>
+              </div>
+              <span class="badge badge-weak" id="count-weak">0</span>
+            </div>
+            <div id="weak-topics-bucket" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <p style="font-size: 0.85rem; color: var(--text-dim);">No severe knowledge gaps detected.</p>
+            </div>
+          </div>
+
+          <!-- Moderate Topics (50-79%) -->
+          <div class="card" style="border-top: 4px solid var(--warning);">
+            <div class="card-header">
+              <div>
+                <h3 style="color: #fbbf24; font-size: 1.15rem;">
+                  <i data-lucide="trending-up" style="width: 18px; height: 18px; vertical-align: middle;"></i>
+                  Consolidation Phase
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Mastery 50-79% • Needs Edge Case Practice</p>
+              </div>
+              <span class="badge badge-moderate" id="count-moderate">0</span>
+            </div>
+            <div id="moderate-topics-bucket" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <p style="font-size: 0.85rem; color: var(--text-dim);">No moderate topics recorded.</p>
+            </div>
+          </div>
+
+          <!-- Strong Topics (80%+) -->
+          <div class="card" style="border-top: 4px solid var(--success);">
+            <div class="card-header">
+              <div>
+                <h3 style="color: #34d399; font-size: 1.15rem;">
+                  <i data-lucide="award" style="width: 18px; height: 18px; vertical-align: middle;"></i>
+                  Mastered Topics
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Mastery &ge; 80% • Ready for Extension</p>
+              </div>
+              <span class="badge badge-strong" id="count-strong">0</span>
+            </div>
+            <div id="strong-topics-bucket" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <p style="font-size: 0.85rem; color: var(--text-dim);">Complete quizzes to establish strong topics.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Topic Mastery Matrix Table -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3>Student Topic Mastery Matrix</h3>
+              <p style="font-size: 0.85rem;">Deterministic weighted score: 60% recent attempt + 30% historical average + 10% consistency</p>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-dim);">
+                  <th style="padding: 0.75rem 1rem;">Subject</th>
+                  <th style="padding: 0.75rem 1rem;">Topic</th>
+                  <th style="padding: 0.75rem 1rem;">Attempts</th>
+                  <th style="padding: 0.75rem 1rem;">Questions Assessed</th>
+                  <th style="padding: 0.75rem 1rem;">Mastery Score</th>
+                  <th style="padding: 0.75rem 1rem;">Status</th>
+                  <th style="padding: 0.75rem 1rem;">Last Assessed</th>
+                  <th style="padding: 0.75rem 1rem; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="mastery-table-body">
+                <tr>
+                  <td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-dim);">
+                    Loading student mastery matrix...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Actionable Adaptive Recommendations Feed -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3>Personalized Next Steps & Interventions</h3>
+              <p style="font-size: 0.85rem;">Targeted recommendations tailored to eliminate your exact knowledge gaps</p>
+            </div>
+          </div>
+
+          <div id="adaptive-feed-container">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/adaptive.js"></script>
+</body>
+</html>
+

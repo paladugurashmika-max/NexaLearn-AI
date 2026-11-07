@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — NexaLearn AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1.5rem;">
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="card" style="max-width: 440px; width: 100%; padding: 2.5rem; box-shadow: var(--shadow-lg);">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="index.html" class="brand-logo" style="justify-content: center; margin-bottom: 1.25rem;">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <span>NexaLearn<span style="color: var(--primary-light);">.AI</span></span>
+      </a>
+      <h2>Welcome Back</h2>
+      <p style="font-size: 0.9rem; margin-top: 0.25rem;">Continue your adaptive learning journey</p>
+    </div>
+
+    <!-- Quick Hackathon Demo Login Button -->
+    <div style="margin-bottom: 1.5rem;">
+      <button type="button" onclick="quickDemoLogin()" class="btn btn-secondary" style="width: 100%; border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.1);">
+        <i data-lucide="zap" style="color: var(--primary-light);"></i>
+        <span>1-Click Hackathon Demo Login</span>
+      </button>
+      <div style="text-align: center; margin: 1.25rem 0 0.75rem; position: relative;">
+        <hr style="border: none; border-top: 1px solid var(--border-color);">
+        <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-card); padding: 0 0.75rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Or with credentials</span>
+      </div>
+    </div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label class="form-label" for="email">Student Email</label>
+        <input type="email" id="email" class="form-input" placeholder="student@university.edu" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 0.75rem;">
+        <span>Log In</span>
+        <i data-lucide="arrow-right"></i>
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 1.75rem; font-size: 0.875rem;">
+      <span style="color: var(--text-muted);">New to NexaLearn AI?</span>
+      <a href="register.html" style="font-weight: 600; margin-left: 0.25rem;">Create Account</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    lucide.createIcons();
+
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Verifying...</span>';
+
+      try {
+        await loginStudent(email, password);
+        showToast('Login successful! Redirecting...', 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 600);
+      } catch (err) {
+        showToast(err.message || 'Login failed', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Log In</span> <i data-lucide="arrow-right"></i>';
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
+

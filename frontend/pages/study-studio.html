@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Studio — NexaLearn AI</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div class="ambient-bg">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">
+          <i data-lucide="brain"></i>
+        </div>
+        <div>
+          <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">NexaLearn<span
+              style="color: var(--primary-light);">.AI</span></span>
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Smart Education</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Core Platform</div>
+        <a href="../dashboard.html" class="nav-item">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="study-studio.html" class="nav-item active">
+          <i data-lucide="file-edit"></i>
+          <span>AI Study Studio</span>
+        </a>
+        <a href="assistant.html" class="nav-item">
+          <i data-lucide="bot"></i>
+          <span>Ask StudyAI</span>
+        </a>
+
+        <div class="nav-category">Practice & Intelligence</div>
+        <a href="quiz.html" class="nav-item">
+          <i data-lucide="check-square"></i>
+          <span>Smart Practice Zone</span>
+        </a>
+        <a href="flashcards.html" class="nav-item">
+          <i data-lucide="layers"></i>
+          <span>AI Flashcards</span>
+        </a>
+        <a href="adaptive-learning.html" class="nav-item">
+          <i data-lucide="cpu"></i>
+          <span>Adaptive Intelligence</span>
+        </a>
+
+        <div class="nav-category">Growth & Planning</div>
+        <a href="planner.html" class="nav-item">
+          <i data-lucide="calendar"></i>
+          <span>AI Study Planner</span>
+        </a>
+        <a href="progress.html" class="nav-item">
+          <i data-lucide="bar-chart-2"></i>
+          <span>Learning Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <i data-lucide="user"></i>
+          <span>Student Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">A</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-name">NexaLearn Demo Student</div>
+            <div class="user-role" id="sidebar-grade">Undergraduate</div>
+          </div>
+          <button onclick="logoutStudent()" title="Logout" class="close-btn" style="margin-left: auto;">
+            <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="page-title">
+          <h2>AI Study Studio</h2>
+        </div>
+        <div class="topbar-actions">
+          <a href="#saved-notes-section" class="btn btn-secondary btn-sm">
+            <i data-lucide="folder"></i>
+            <span>Saved Notes Library</span>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Sub-tabs: Notes Generator | Summarizer | Concept Simplifier -->
+        <div
+          style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+          <button class="btn btn-secondary btn-sm tab-btn active" data-tab="notes-tab"
+            onclick="switchStudioTab('notes-tab', this)">
+            <i data-lucide="file-text"></i>
+            <span>Notes Generator</span>
+          </button>
+          <button class="btn btn-secondary btn-sm tab-btn" data-tab="summary-tab"
+            onclick="switchStudioTab('summary-tab', this)">
+            <i data-lucide="align-left"></i>
+            <span>AI Summarizer</span>
+          </button>
+          <button class="btn btn-secondary btn-sm tab-btn" data-tab="simplifier-tab"
+            onclick="switchStudioTab('simplifier-tab', this)">
+            <i data-lucide="lightbulb"></i>
+            <span>Concept Simplifier</span>
+          </button>
+        </div>
+
+        <!-- TAB 1: Notes Generator -->
+        <div id="notes-tab" class="studio-tab-content active">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <!-- Left: Input Form -->
+            <div class="card">
+              <div class="card-header">
+                <h3>1. Input Study Material</h3>
+                <span class="badge badge-primary">Gemini 3.5 Flash</span>
+              </div>
+
+              <form id="notes-form">
+                <div class="form-group">
+                  <label class="form-label" for="notes-topic">Topic Name *</label>
+                  <input type="text" id="notes-topic" class="form-input"
+                    placeholder="e.g. Python Recursion, Quantum Superposition, Mitosis" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="notes-subject">Academic Subject</label>
+                  <input type="text" id="notes-subject" class="form-input"
+                    placeholder="e.g. Computer Science, Physics, Biology" value="Computer Science">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="notes-depth">Target Depth / Difficulty</label>
+                  <select id="notes-depth" class="form-select">
+                    <option value="beginner">Beginner (Foundational, Intuitive)</option>
+                    <option value="intermediate" selected>Intermediate (Standard Academic Depth)</option>
+                    <option value="advanced">Advanced (Deep Dive, Edge Cases)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Or Upload Supported PDF Material (Max 10MB)</label>
+                  <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="file" id="pdf-file-input" accept="application/pdf" class="form-input"
+                      style="padding: 0.5rem;">
+                    <button type="button" id="extract-pdf-btn" onclick="extractPdf()" class="btn btn-secondary btn-sm">
+                      <i data-lucide="upload"></i>
+                      <span>Extract</span>
+                    </button>
+                  </div>
+                  <div id="pdf-status" style="font-size: 0.8rem; margin-top: 0.4rem; color: var(--text-dim);"></div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="notes-content">Paste Source Text / Lecture Notes (Optional)</label>
+                  <textarea id="notes-content" class="form-textarea"
+                    placeholder="Paste textbook excerpts, slide transcripts, or syllabus requirements here..."></textarea>
+                </div>
+
+                <div style="display: flex; gap: 0.75rem;">
+                  <button type="submit" id="generate-notes-btn" class="btn btn-primary" style="flex: 1;">
+                    <i data-lucide="sparkles"></i>
+                    <span>Generate Structured Notes</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right: Generated Notes Display -->
+            <div class="card" id="notes-result-card" style="display: flex; flex-direction: column;">
+              <div class="card-header">
+                <h3 id="notes-result-title">Generated Study Notes</h3>
+                <button type="button" id="save-note-btn" onclick="saveCurrentNote()" class="btn btn-outline btn-sm"
+                  style="display: none;">
+                  <i data-lucide="bookmark"></i>
+                  <span>Save to Library</span>
+                </button>
+              </div>
+
+              <div id="notes-output-area" style="flex: 1; overflow-y: auto; max-height: 650px;">
+                <div class="empty-state">
+                  <div class="empty-icon">
+                    <i data-lucide="book-open"></i>
+                  </div>
+                  <div class="empty-title">Ready to Synthesize</div>
+                  <div class="empty-desc">Enter a topic or upload your study material on the left to generate structured
+                    notes, definitions, and key takeaways.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: AI Summarizer -->
+        <div id="summary-tab" class="studio-tab-content" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3>AI Summarizer</h3>
+                <span class="badge badge-primary">Synthesis</span>
+              </div>
+
+              <form id="summary-form">
+                <div class="form-group">
+                  <label class="form-label" for="summary-topic">Topic or Document Name</label>
+                  <input type="text" id="summary-topic" class="form-input"
+                    placeholder="e.g. Operating System Deadlocks">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="summary-type">Summary Style</label>
+                  <select id="summary-type" class="form-select">
+                    <option value="short">Short (1-2 Paragraph Essence)</option>
+                    <option value="detailed">Detailed (Comprehensive Section Breakdown)</option>
+                    <option value="key_points">Important Points (Bulleted Takeaways)</option>
+                    <option value="chapter">Chapter Summary (Structured Syllabus Outline)</option>
+                    <option value="exam_revision">Exam-Oriented Revision (High-Yield Formula & Traps)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="summary-content">Source Content to Summarize *</label>
+                  <textarea id="summary-content" class="form-textarea" style="min-height: 200px;"
+                    placeholder="Paste raw article, chapter text, or lecture content..." required></textarea>
+                </div>
+
+                <button type="submit" id="generate-summary-btn" class="btn btn-primary" style="width: 100%;">
+                  <i data-lucide="sparkles"></i>
+                  <span>Generate Summary</span>
+                </button>
+              </form>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column;">
+              <div class="card-header">
+                <h3>Synthesized Summary</h3>
+              </div>
+              <div id="summary-output-area" style="flex: 1; overflow-y: auto; max-height: 600px;">
+                <div class="empty-state">
+                  <div class="empty-icon"><i data-lucide="file-text"></i></div>
+                  <div class="empty-title">No Summary Generated Yet</div>
+                  <div class="empty-desc">Choose a summary style and enter text to extract high-yield insights.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Concept Simplifier -->
+        <div id="simplifier-tab" class="studio-tab-content" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3>Concept Simplifier</h3>
+                <span class="badge badge-primary">Pedagogical AI</span>
+              </div>
+
+              <form id="simplifier-form">
+                <div class="form-group">
+                  <label class="form-label" for="simplifier-topic">Topic / Concept *</label>
+                  <input type="text" id="simplifier-topic" class="form-input"
+                    placeholder="e.g. Call Stack in Recursion, Backpropagation, Monads" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="simplifier-level">Explanation Level</label>
+                  <select id="simplifier-level" class="form-select">
+                    <option value="beginner" selected>Beginner (ELI5, Everyday Analogies)</option>
+                    <option value="intermediate">Intermediate (Step-by-Step Logic)</option>
+                    <option value="advanced">Advanced (Deep Rigor, Math, Tradeoffs)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="simplifier-question">Specific Confusion or Follow-Up Question
+                    (Optional)</label>
+                  <textarea id="simplifier-question" class="form-textarea"
+                    placeholder="e.g. Why does it not run forever if there is no while loop?"></textarea>
+                </div>
+
+                <button type="submit" id="simplify-btn" class="btn btn-primary" style="width: 100%;">
+                  <i data-lucide="lightbulb"></i>
+                  <span>Simplify Concept</span>
+                </button>
+              </form>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column;">
+              <div class="card-header">
+                <h3>Intuitive Explanation</h3>
+              </div>
+              <div id="simplifier-output-area" style="flex: 1; overflow-y: auto; max-height: 600px;">
+                <div class="empty-state">
+                  <div class="empty-icon"><i data-lucide="compass"></i></div>
+                  <div class="empty-title">Explain Difficult Ideas Simply</div>
+                  <div class="empty-desc">Break down complex concepts into step-by-step logic and intuitive analogies.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Notes Library Section -->
+        <div id="saved-notes-section" style="margin-top: 3rem;">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Personal Study Library</h3>
+                <p style="font-size: 0.85rem;">Saved notes and revision guides</p>
+              </div>
+              <input type="text" id="notes-search-input" oninput="filterNotes(this.value)"
+                placeholder="Search notes by topic..." class="form-input"
+                style="max-width: 250px; padding: 0.4rem 0.75rem;">
+            </div>
+
+            <div id="saved-notes-grid"
+              style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+              <div class="empty-state" style="grid-column: 1 / -1;">
+                <div class="empty-icon"><i data-lucide="inbox"></i></div>
+                <div class="empty-title">No Saved Notes Yet</div>
+                <div class="empty-desc">Generate notes using the form above and click "Save to Library".</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/study-studio.js"></script>
+</body>
+
+</html>
